@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lottó játék</title>
+  <link rel="icon" href="https://www.onlinelotto.hu/wp-content/uploads/2022/11/lottery_24.png">
+</head>
+
+<body style="background-color: rgb(52, 173, 54);">
+
+  <h1>Kamu 5-ös lottó
+      NE LOTTÓZZ</h1>
+
+  <p>Add meg az 5 számod (1–90 között):</p>
+
+  <input type="number" id="n1" min="1" max="90">
+  <input type="number" id="n2" min="1" max="90">
+  <input type="number" id="n3" min="1" max="90">
+  <input type="number" id="n4" min="1" max="90">
+  <input type="number" id="n5" min="1" max="90">
+
+  <br><br>
+  <button onclick="sorsolas()">Sorsolás</button>
+
+  <p id="eredmeny"></p>
+
+  <img src="https://pcdn.hu/articles/images-xs/m/e/g/megnyertem-az-otoslottot-uristen-mit-csinaljak-311287.jpg"
+       width="300">
+
+  <script>
+    function sorsolas() {
+      let tipp = [
+        n1.value, n2.value, n3.value, n4.value, n5.value
+      ].map(Number).sort((a,b)=>a-b);
+
+      let nyero = [];
+      while (nyero.length < 5) {
+        let r = Math.floor(Math.random() * 90) + 1;
+        if (!nyero.includes(r)) nyero.push(r);
+      }
+      nyero.sort((a,b)=>a-b);
+
+      let nyert = JSON.stringify(tipp) === JSON.stringify(nyero);
+
+      document.getElementById("eredmeny").innerHTML =
+        "Nyerőszámok: " + nyero.join(", ") + "<br>" +
+        (nyert ? "🎉 NYERTÉL!" : "❌ Nem nyertél");
+    }
+  </script>
+<h2>Az 5-ös lottó megnyerésének esélye: 1 az 43 949  268-hoz≈0.000002276%
+</body>
+</html>
